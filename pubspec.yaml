@@ -1,7 +1,7 @@
 name: snapshot_helper
 description: A simple helper to manage widget output from the AsyncSnapshot of a stream.
 version: 1.0.0
-homepage: https://magicleon94.dev
+homepage: https://github.com/magicleon94/snapshot_helper
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
