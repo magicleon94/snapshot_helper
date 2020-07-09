@@ -1,0 +1,15 @@
+name: snapshot_helper
+description: A simple helper to manage widget output from the AsyncSnapshot of a stream.
+version: 1.0.0
+homepage: https://magicleon94.dev
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
