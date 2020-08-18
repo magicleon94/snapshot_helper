@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart';
 typedef SnapshotBuilder<T> = Widget Function(AsyncSnapshot<T>);
 typedef SnapshotPredicate<T> = bool Function(AsyncSnapshot<T>);
 
+/// AsyncSnapshot wrapper
 class SnapshotHelper<T> {
+  /// [snapshot] is the original snapshot to process
   final AsyncSnapshot<T> snapshot;
   final SnapshotPredicate<T> _loadingPredicate;
   final SnapshotPredicate<T> _dataPredicate;
@@ -11,29 +13,37 @@ class SnapshotHelper<T> {
 
   SnapshotHelper(
     this.snapshot, {
+
+    /// [loadingPredicate] is the optional predicate to determine the loading status
     SnapshotPredicate<T> loadingPredicate,
+
+    /// [dataPredicate] is the optional predicate to determine the onData status
     SnapshotPredicate<T> dataPredicate,
+
+    /// [errorPredicate] is the optional predicate to determine the onError status
     SnapshotPredicate<T> errorPredicate,
     Widget defaultWidget,
   })  : _loadingPredicate = loadingPredicate,
         _dataPredicate = dataPredicate,
         _errorPredicate = errorPredicate;
 
+  /// [defaultLoadingPredicate] is the default predicate to determine the loading status
   @protected
   bool defaultLoadingPredicate(AsyncSnapshot<T> snapshot) =>
       (snapshot.connectionState == ConnectionState.waiting) ||
       (snapshot.connectionState == ConnectionState.active && !snapshot.hasData);
 
+  /// [defaultDataPredicate] is the default predicate to determine the onData status
   @protected
   bool defaultDataPredicate(AsyncSnapshot<T> snapshot) =>
       snapshot.hasData && !snapshot.hasError;
 
+  /// [defaultErrorPredicate] is the default predicate to determine the onError status
   @protected
   bool defaultErrorPredicate(AsyncSnapshot<T> snapshot) => snapshot.hasError;
 
   ///Creates an instance of the helper for the given [snapshot].
   ///Supply additional predicates in case of needing more complex rules.
-
   factory SnapshotHelper.of(
     AsyncSnapshot<T> snapshot, {
     SnapshotPredicate<T> loadingPredicate,
